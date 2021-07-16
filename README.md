@@ -31,7 +31,8 @@ My hot tub turns on one pump every 30m to check the water temperature. I can als
 for the filter cycles. And I can see when the hot tub heater turns on and how much energy it uses (it's 
 interesting to compare summer vs winter!)
 
-To use this tool, you'll need docker installed on your computer and you'll need to be comfortable
+# OK I want it. How do I get it?
+To use this tool, you'll need docker installed on your computer, and you'll need to be comfortable
 with the command line.
 
 You'll get the most value by having this running all the time, queried by prometheus, and viewing
@@ -46,9 +47,7 @@ The image can be found on
 
 
 Builds are currently manual with each new version since Docker automated builds don't currently support
-building for arm64:
-![Build type](https://img.shields.io/docker/cloud/automated/ejsuncy/sense_energy_prometheus_exporter)
-![Build status](https://img.shields.io/docker/cloud/build/ejsuncy/sense_energy_prometheus_exporter)
+building for arm64.
 
 ## Usage
 ```shell
