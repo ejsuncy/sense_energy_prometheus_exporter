@@ -6,21 +6,18 @@ This is a prometheus exporter for the [Sense](https://sense.com) energy monitor 
 
 Internally it uses the [Sense Energy Monitor API Interface](https://github.com/scottbonline/sense) client.
 
+The image can be found on
+[Dockerhub](https://hub.docker.com/repository/docker/ejsuncy/sense_energy_prometheus_exporter). 
+
+
+Builds are automated with a new version tag pushed to Github:
+![Build automated](https://img.shields.io/docker/cloud/automated/ejsuncy/sense_energy_prometheus_exporter)
+![Build status](https://img.shields.io/docker/cloud/build/ejsuncy/sense_energy_prometheus_exporter)
+
 ## Usage
-Environment Variables available:
-
-| Variable | Description | Options | Default |
-|---|---|---|---|
-| `EXPORTER_LOG_LEVEL` | Controls verbosity of logs | `DEBUG`, `INFO`, `WARNING`, `ERROR` | `INFO` |
-| `SENSE_ACCOUNT_NAME_<n>` | The name to identify the account by. `<n>` is an integer that links the other env vars containing `<n>`. | | |
-| `SENSE_ACCOUNT_USERNAME_<n>` | The username (email address) used to login to the account. `<n>` is an integer that links the other env vars containing `<n>`. | | |
-| `SENSE_ACCOUNT_PASSWORD_<n>` | The password used to login to the account. `<n>` is an integer that links the other env vars containing `<n>`. | | |
-| `TZ` | The timezone to use for the container. Use the string in `TZ database name` column of the [List of TZ Database Time Zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). | | None (container defaults to UTC time)|
-| `EXPORTER_PORT` | The port to listen on | | `9993` |
-| `EXPORTER_BIND_HOST` | The address to listen on | | `0.0.0.0` |
-| `EXPORTER_NAMESPACE` | The prefix to use for prometheus metrics | | `sense_energy` |
-| `CONFIG_FILE` | The container filepath to the config file | | `/etc/sense_energy_prometheus_exporter/config.yaml` |
-
+```shell
+docker pull ejsuncy/sense_energy_prometheus_exporter:latest
+```
 
 ### Running locally
 An example of using this exporter for 3 different Sense devices/accounts:
@@ -50,6 +47,20 @@ http://0.0.0.0:9993/metrics
 ```
 
 You can find sample metric output in [data/metrics.txt](data/metrics.txt).
+
+#### Environment Variables
+
+| Variable | Description | Options | Default |
+|---|---|---|---|
+| `EXPORTER_LOG_LEVEL` | Controls verbosity of logs | `DEBUG`, `INFO`, `WARNING`, `ERROR` | `INFO` |
+| `SENSE_ACCOUNT_NAME_<n>` | The name to identify the account by. `<n>` is an integer that links the other env vars containing `<n>`. | | |
+| `SENSE_ACCOUNT_USERNAME_<n>` | The username (email address) used to login to the account. `<n>` is an integer that links the other env vars containing `<n>`. | | |
+| `SENSE_ACCOUNT_PASSWORD_<n>` | The password used to login to the account. `<n>` is an integer that links the other env vars containing `<n>`. | | |
+| `TZ` | The timezone to use for the container. Use the string in `TZ database name` column of the [List of TZ Database Time Zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). | | None (container defaults to UTC time)|
+| `EXPORTER_PORT` | The port to listen on | | `9993` |
+| `EXPORTER_BIND_HOST` | The address to listen on | | `0.0.0.0` |
+| `EXPORTER_NAMESPACE` | The prefix to use for prometheus metrics | | `sense_energy` |
+| `CONFIG_FILE` | The container filepath to the config file | | `/etc/sense_energy_prometheus_exporter/config.yaml` |
 
 ### Running on kubernetes
 A sample manifest:
@@ -193,6 +204,11 @@ docker build -t ejsuncy/sense_energy_prometheus_exporter:latest .
 Or build for other architectures (for example, if you're developing on an ARM mac but deploying to AMD linux kubernetes):
 ```shell
 docker buildx build -t ejsuncy/sense_energy_prometheus_exporter:latest --platform linux/amd64 .
+```
+
+Build locally for multiple architectures:
+```shell
+make build
 ```
 
 ### <a name="releaseandpublishing"></a>Releasing & Publishing
