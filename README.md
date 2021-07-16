@@ -188,7 +188,12 @@ The [github cli](https://github.com/cli/cli) is required for making releases.
 Note: this will make a release for the current state of the default branch in origin, so commit and push
 changes before making the release.
 
-Tag, build, and push for multiple arch with the release tag listed in [VERSION.txt](VERSION.txt):
+Tag, build, and push image to Docker Hub for multiple arch with the release tag listed in [VERSION.txt](VERSION.txt):
 ```shell
-make release
+make release-dockerhub
+```
+
+Make tag and release on Github:
+```shell
+make release-github
 ```

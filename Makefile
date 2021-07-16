@@ -6,7 +6,7 @@ venv:
 	pip install --upgrade pip build setuptools wheel && \
 	pip install -r requirements.txt
 
-release:
+release-dockerhub:
 	echo Building version $(VERSION) && \
 	docker login && \
 	docker buildx create --use && \
@@ -14,5 +14,8 @@ release:
 	  --push \
 	  --platform linux/amd64,linux/arm64 \
 	  --tag ejsuncy/sense_energy_prometheus_exporter:"$(VERSION)" . && \
+
+release-github:
+	export GITHUB_TOKEN="" && \
 	gh auth login && \
 	gh release create "v$(VERSION)" --notes "Release v$(VERSION)"
