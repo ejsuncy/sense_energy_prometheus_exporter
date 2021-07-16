@@ -6,11 +6,19 @@ venv:
 	pip install --upgrade pip build setuptools wheel && \
 	pip install -r requirements.txt
 
+
+build:
+	echo Building version $(VERSION) && \
+	docker buildx create --use && \
+	docker buildx build \
+	  --platform linux/amd64,linux/arm64 \
+	  --tag ejsuncy/sense_energy_prometheus_exporter:"$(VERSION)" .
+
 release-dockerhub:
 	echo Building version $(VERSION) && \
 	docker buildx create --use && \
 	docker buildx build \
-	  --push
+	  --push \
 	  --platform linux/amd64,linux/arm64 \
 	  --tag ejsuncy/sense_energy_prometheus_exporter:"$(VERSION)" .
 
