@@ -20,7 +20,8 @@ release-dockerhub:
 	docker buildx build \
 	  --push \
 	  --platform linux/amd64,linux/arm64 \
-	  --tag ejsuncy/sense_energy_prometheus_exporter:"$(VERSION)" .
+	  --tag ejsuncy/sense_energy_prometheus_exporter:"$(VERSION)" \
+	  --tag ejsuncy/sense_energy_prometheus_exporter:latest .
 
 release-github:
 	export GITHUB_TOKEN="" && \
