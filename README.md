@@ -49,6 +49,8 @@ Then visit in your browser:
 http://0.0.0.0:9993/metrics
 ```
 
+You can find sample metric output in [data/metrics.txt](data/metrics.txt).
+
 ### Running on kubernetes
 A sample manifest:
 ```yaml

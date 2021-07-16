@@ -1,0 +1,200 @@
+# HELP python_gc_objects_collected_total Objects collected during gc
+# TYPE python_gc_objects_collected_total counter
+python_gc_objects_collected_total{generation="0"} 410.0
+python_gc_objects_collected_total{generation="1"} 89.0
+python_gc_objects_collected_total{generation="2"} 0.0
+# HELP python_gc_objects_uncollectable_total Uncollectable object found during GC
+# TYPE python_gc_objects_uncollectable_total counter
+python_gc_objects_uncollectable_total{generation="0"} 0.0
+python_gc_objects_uncollectable_total{generation="1"} 0.0
+python_gc_objects_uncollectable_total{generation="2"} 0.0
+# HELP python_gc_collections_total Number of times this generation was collected
+# TYPE python_gc_collections_total counter
+python_gc_collections_total{generation="0"} 79.0
+python_gc_collections_total{generation="1"} 7.0
+python_gc_collections_total{generation="2"} 0.0
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="3",minor="8",patchlevel="11",version="3.8.11"} 1.0
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 0.0
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 0.0
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.625135771e+09
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 0.0
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 8.0
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1.048576e+06
+# HELP sense_energy_account_scrapes_total Total number of scrapes for account stats
+# TYPE sense_energy_account_scrapes_total counter
+sense_energy_account_scrapes_total 3.0
+# HELP sense_energy_account_scrapes_created Total number of scrapes for account stats
+# TYPE sense_energy_account_scrapes_created gauge
+sense_energy_account_scrapes_created 1.6264477105938883e+09
+# HELP sense_energy_account_scrape_errors_total Total number of scrape errors for account stats
+# TYPE sense_energy_account_scrape_errors_total counter
+sense_energy_account_scrape_errors_total 0.0
+# HELP sense_energy_account_scrape_errors_created Total number of scrape errors for account stats
+# TYPE sense_energy_account_scrape_errors_created gauge
+sense_energy_account_scrape_errors_created 1.626447710594003e+09
+# HELP sense_energy_last_account_scrape_error Status of last scrape for account stats (1=error, 0=success)
+# TYPE sense_energy_last_account_scrape_error gauge
+sense_energy_last_account_scrape_error 0.0
+# HELP sense_energy_last_account_scrape_timestamp Number of seconds between 1970 and last scrape for account stats
+# TYPE sense_energy_last_account_scrape_timestamp gauge
+sense_energy_last_account_scrape_timestamp 1.626447767087736e+09
+# HELP sense_energy_last_account_scrape_duration_seconds Duration of last scrape for account stats
+# TYPE sense_energy_last_account_scrape_duration_seconds gauge
+sense_energy_last_account_scrape_duration_seconds 0.0018186569213867188
+# HELP sense_energy_account_info account information including: name, username
+# TYPE sense_energy_account_info gauge
+sense_energy_account_info{name="Home",username="account3@test.com"} 1.0
+sense_energy_account_info{name="Backyard Subpanel",username="account2@test.com"} 1.0
+sense_energy_account_info{name="A/C",username="account1@test.com"} 1.0
+# HELP sense_energy_device_scrapes_total Total number of scrapes for device stats
+# TYPE sense_energy_device_scrapes_total counter
+sense_energy_device_scrapes_total 3.0
+# HELP sense_energy_device_scrapes_created Total number of scrapes for device stats
+# TYPE sense_energy_device_scrapes_created gauge
+sense_energy_device_scrapes_created 1.6264477105970457e+09
+# HELP sense_energy_device_scrape_errors_total Total number of scrape errors for device stats
+# TYPE sense_energy_device_scrape_errors_total counter
+sense_energy_device_scrape_errors_total 3.0
+# HELP sense_energy_device_scrape_errors_created Total number of scrape errors for device stats
+# TYPE sense_energy_device_scrape_errors_created gauge
+sense_energy_device_scrape_errors_created 1.6264477105971372e+09
+# HELP sense_energy_last_device_scrape_error Status of last scrape for device stats (1=error, 0=success)
+# TYPE sense_energy_last_device_scrape_error gauge
+sense_energy_last_device_scrape_error 1.0
+# HELP sense_energy_last_device_scrape_timestamp Number of seconds between 1970 and last scrape for device stats
+# TYPE sense_energy_last_device_scrape_timestamp gauge
+sense_energy_last_device_scrape_timestamp 1.6264477674561138e+09
+# HELP sense_energy_last_device_scrape_duration_seconds Duration of last scrape for device stats
+# TYPE sense_energy_last_device_scrape_duration_seconds gauge
+sense_energy_last_device_scrape_duration_seconds 0.3677492141723633
+# HELP sense_energy_device_watts device power usage in watts
+# TYPE sense_energy_device_watts gauge
+# HELP sense_energy_current_scrapes_total Total number of scrapes for current stats
+# TYPE sense_energy_current_scrapes_total counter
+sense_energy_current_scrapes_total 3.0
+# HELP sense_energy_current_scrapes_created Total number of scrapes for current stats
+# TYPE sense_energy_current_scrapes_created gauge
+sense_energy_current_scrapes_created 1.6264477112114024e+09
+# HELP sense_energy_current_scrape_errors_total Total number of scrape errors for current stats
+# TYPE sense_energy_current_scrape_errors_total counter
+sense_energy_current_scrape_errors_total 3.0
+# HELP sense_energy_current_scrape_errors_created Total number of scrape errors for current stats
+# TYPE sense_energy_current_scrape_errors_created gauge
+sense_energy_current_scrape_errors_created 1.6264477112114959e+09
+# HELP sense_energy_last_current_scrape_error Status of last scrape for current stats (1=error, 0=success)
+# TYPE sense_energy_last_current_scrape_error gauge
+sense_energy_last_current_scrape_error 1.0
+# HELP sense_energy_last_current_scrape_timestamp Number of seconds between 1970 and last scrape for current stats
+# TYPE sense_energy_last_current_scrape_timestamp gauge
+sense_energy_last_current_scrape_timestamp 1.6264477677966912e+09
+# HELP sense_energy_last_current_scrape_duration_seconds Duration of last scrape for current stats
+# TYPE sense_energy_last_current_scrape_duration_seconds gauge
+sense_energy_last_current_scrape_duration_seconds 0.34005117416381836
+# HELP sense_energy_current_amps current measurement in amps
+# TYPE sense_energy_current_amps gauge
+# HELP sense_energy_frequency_scrapes_total Total number of scrapes for frequency stats
+# TYPE sense_energy_frequency_scrapes_total counter
+sense_energy_frequency_scrapes_total 3.0
+# HELP sense_energy_frequency_scrapes_created Total number of scrapes for frequency stats
+# TYPE sense_energy_frequency_scrapes_created gauge
+sense_energy_frequency_scrapes_created 1.6264477115347826e+09
+# HELP sense_energy_frequency_scrape_errors_total Total number of scrape errors for frequency stats
+# TYPE sense_energy_frequency_scrape_errors_total counter
+sense_energy_frequency_scrape_errors_total 3.0
+# HELP sense_energy_frequency_scrape_errors_created Total number of scrape errors for frequency stats
+# TYPE sense_energy_frequency_scrape_errors_created gauge
+sense_energy_frequency_scrape_errors_created 1.6264477115348833e+09
+# HELP sense_energy_last_frequency_scrape_error Status of last scrape for frequency stats (1=error, 0=success)
+# TYPE sense_energy_last_frequency_scrape_error gauge
+sense_energy_last_frequency_scrape_error 1.0
+# HELP sense_energy_last_frequency_scrape_timestamp Number of seconds between 1970 and last scrape for frequency stats
+# TYPE sense_energy_last_frequency_scrape_timestamp gauge
+sense_energy_last_frequency_scrape_timestamp 1.6264477682067022e+09
+# HELP sense_energy_last_frequency_scrape_duration_seconds Duration of last scrape for frequency stats
+# TYPE sense_energy_last_frequency_scrape_duration_seconds gauge
+sense_energy_last_frequency_scrape_duration_seconds 0.40812253952026367
+# HELP sense_energy_frequency_hertz frequency measurement in hertz
+# TYPE sense_energy_frequency_hertz gauge
+# HELP sense_energy_power_scrapes_total Total number of scrapes for power stats
+# TYPE sense_energy_power_scrapes_total counter
+sense_energy_power_scrapes_total 3.0
+# HELP sense_energy_power_scrapes_created Total number of scrapes for power stats
+# TYPE sense_energy_power_scrapes_created gauge
+sense_energy_power_scrapes_created 1.6264477118591552e+09
+# HELP sense_energy_power_scrape_errors_total Total number of scrape errors for power stats
+# TYPE sense_energy_power_scrape_errors_total counter
+sense_energy_power_scrape_errors_total 3.0
+# HELP sense_energy_power_scrape_errors_created Total number of scrape errors for power stats
+# TYPE sense_energy_power_scrape_errors_created gauge
+sense_energy_power_scrape_errors_created 1.6264477118592403e+09
+# HELP sense_energy_last_power_scrape_error Status of last scrape for power stats (1=error, 0=success)
+# TYPE sense_energy_last_power_scrape_error gauge
+sense_energy_last_power_scrape_error 1.0
+# HELP sense_energy_last_power_scrape_timestamp Number of seconds between 1970 and last scrape for power stats
+# TYPE sense_energy_last_power_scrape_timestamp gauge
+sense_energy_last_power_scrape_timestamp 1.6264477685490117e+09
+# HELP sense_energy_last_power_scrape_duration_seconds Duration of last scrape for power stats
+# TYPE sense_energy_last_power_scrape_duration_seconds gauge
+sense_energy_last_power_scrape_duration_seconds 0.3414032459259033
+# HELP sense_energy_power_watts power measurement in watts
+# TYPE sense_energy_power_watts gauge
+# HELP sense_energy_voltage_scrapes_total Total number of scrapes for voltage stats
+# TYPE sense_energy_voltage_scrapes_total counter
+sense_energy_voltage_scrapes_total 3.0
+# HELP sense_energy_voltage_scrapes_created Total number of scrapes for voltage stats
+# TYPE sense_energy_voltage_scrapes_created gauge
+sense_energy_voltage_scrapes_created 1.6264477121905208e+09
+# HELP sense_energy_voltage_scrape_errors_total Total number of scrape errors for voltage stats
+# TYPE sense_energy_voltage_scrape_errors_total counter
+sense_energy_voltage_scrape_errors_total 3.0
+# HELP sense_energy_voltage_scrape_errors_created Total number of scrape errors for voltage stats
+# TYPE sense_energy_voltage_scrape_errors_created gauge
+sense_energy_voltage_scrape_errors_created 1.6264477121906075e+09
+# HELP sense_energy_last_voltage_scrape_error Status of last scrape for voltage stats (1=error, 0=success)
+# TYPE sense_energy_last_voltage_scrape_error gauge
+sense_energy_last_voltage_scrape_error 1.0
+# HELP sense_energy_last_voltage_scrape_timestamp Number of seconds between 1970 and last scrape for voltage stats
+# TYPE sense_energy_last_voltage_scrape_timestamp gauge
+sense_energy_last_voltage_scrape_timestamp 1.6264477688810036e+09
+# HELP sense_energy_last_voltage_scrape_duration_seconds Duration of last scrape for voltage stats
+# TYPE sense_energy_last_voltage_scrape_duration_seconds gauge
+sense_energy_last_voltage_scrape_duration_seconds 0.3311901092529297
+# HELP sense_energy_voltage_volts voltage measurement in volts
+# TYPE sense_energy_voltage_volts gauge
+# HELP sense_energy_trend_scrapes_total Total number of scrapes for trend stats
+# TYPE sense_energy_trend_scrapes_total counter
+sense_energy_trend_scrapes_total 3.0
+# HELP sense_energy_trend_scrapes_created Total number of scrapes for trend stats
+# TYPE sense_energy_trend_scrapes_created gauge
+sense_energy_trend_scrapes_created 1.626447712528048e+09
+# HELP sense_energy_trend_scrape_errors_total Total number of scrape errors for trend stats
+# TYPE sense_energy_trend_scrape_errors_total counter
+sense_energy_trend_scrape_errors_total 3.0
+# HELP sense_energy_trend_scrape_errors_created Total number of scrape errors for trend stats
+# TYPE sense_energy_trend_scrape_errors_created gauge
+sense_energy_trend_scrape_errors_created 1.6264477125281513e+09
+# HELP sense_energy_last_trend_scrape_error Status of last scrape for trend stats (1=error, 0=success)
+# TYPE sense_energy_last_trend_scrape_error gauge
+sense_energy_last_trend_scrape_error 1.0
+# HELP sense_energy_last_trend_scrape_timestamp Number of seconds between 1970 and last scrape for trend stats
+# TYPE sense_energy_last_trend_scrape_timestamp gauge
+sense_energy_last_trend_scrape_timestamp 1.6264477691913261e+09
+# HELP sense_energy_last_trend_scrape_duration_seconds Duration of last scrape for trend stats
+# TYPE sense_energy_last_trend_scrape_duration_seconds gauge
+sense_energy_last_trend_scrape_duration_seconds 0.3095412254333496
+# HELP sense_energy_trend_kWh trend measurement in kWh
+# TYPE sense_energy_trend_kWh gauge
