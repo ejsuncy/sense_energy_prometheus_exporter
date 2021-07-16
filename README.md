@@ -4,6 +4,41 @@
 
 This is a prometheus exporter for the [Sense](https://sense.com) energy monitor products.
 
+# Is this the right tool for me?
+With this exporter, you can create charts in grafana like this:
+
+#### Last 30 days:
+![monthly usage](img/energy_month.png)
+
+#### Last 24 hours:
+![daily usage](img/energy_day.png)
+
+In my case, I have 3 electrical panels:
+* A/C panel
+  * The line splits off in the main service panel before the whole-home breaker
+* Whole-home panel
+* Backyard subpanel
+  * The line also splits off in the main service panel before the whole-home breaker
+  * There is a hot tub attached to this panel
+  
+In these charts you can see both realtime usage and daily/weekly/monthly usage trends.
+
+It's interesting to see that even though my A/C and home are monitored by different sense devices,
+I can break down how much my A/C condenser uses vs how much the blower uses (the blower is inside
+the house and monitored by the sense device attached to my whole-home breaker lines).
+
+My hot tub turns on one pump every 30m to check the water temperature. I can also see when it turns on
+for the filter cycles. And I can see when the hot tub heater turns on and how much energy it uses (it's 
+interesting to compare summer vs winter!)
+
+To use this tool, you'll need docker installed on your computer and you'll need to be comfortable
+with the command line.
+
+You'll get the most value by having this running all the time, queried by prometheus, and viewing
+the metrics via grafana.
+
+See [the sample metrics](data/metrics.txt) for a list of metrics you can query in prometheus.
+
 Internally it uses the [Sense Energy Monitor API Interface](https://github.com/scottbonline/sense) client.
 
 The image can be found on
