@@ -12,6 +12,7 @@ release:
 	docker buildx create --use && \
 	docker buildx build \
 	  --push \
-	  --platform linux/amd64,linux/arm64,linux/arm64/v8 \
+	  --platform linux/amd64,linux/arm64 \
 	  --tag ejsuncy/sense_energy_prometheus_exporter:"$(VERSION)" . && \
+	gh auth login && \
 	gh release create "v$(VERSION)" --notes "Release v$(VERSION)"
