@@ -184,6 +184,10 @@ docker buildx build -t ejsuncy/sense_energy_prometheus_exporter:latest --platfor
 ```
 
 ### Releasing & Publishing
+The [github cli](https://github.com/cli/cli) is required for making releases.
+Note: this will make a release for the current state of the default branch in origin, so commit and push
+changes before making the release.
+
 Tag, build, and push for multiple arch with the release tag listed in [VERSION.txt](VERSION.txt):
 ```shell
 make release
