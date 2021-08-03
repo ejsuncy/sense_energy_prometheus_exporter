@@ -332,12 +332,16 @@ class SenseClient(object):
                 account.senseable.update_realtime()
                 power = account.senseable.active_power
                 solar_power = account.senseable.active_solar_power
+                active_devices = account.senseable.get_realtime()['devices']
             except Exception as e:
                 logging.error("Unable to retrieve power info from Sense account name %s: %s", account.name, e)
                 continue
 
             powers.append(SensePower.from_api(account.name, "main", power))
             powers.append(SensePower.from_api(account.name, "solar", solar_power))
+
+            for d in active_devices:
+                powers.append(SensePower.from_api(account.name, d['name'], d['w']))
 
         return powers
 
