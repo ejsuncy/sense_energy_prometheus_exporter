@@ -252,7 +252,7 @@ Note: this will make a release for the current state of the default branch in or
 changes before making the release.
 
 Tag, build, and push the docker image for multiple architectures with version listed in 
-[VERISION.txt](VERSION.txt) to docker hub:
+[VERSION.txt](VERSION.txt) to docker hub:
 ```shell
 make release-dockerhub
 ```
