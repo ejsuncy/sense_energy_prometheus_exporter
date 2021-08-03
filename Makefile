@@ -16,6 +16,7 @@ build:
 
 release-dockerhub:
 	echo Building version $(VERSION) && \
+	docker login && \
 	docker buildx create --use && \
 	docker buildx build \
 	  --push \
