@@ -10,21 +10,29 @@ venv:
 build:
 	echo Building version $(VERSION) && \
 	docker buildx create --use && \
-	docker buildx build \
-	  --platform linux/amd64,linux/arm64 \
-	  --tag ejsuncy/sense_energy_prometheus_exporter:"$(VERSION)" .
+	docker buildx build . \
+	  --platform linux/amd64,linux/arm64/v8 \
+	  --tag ghcr.io/ejsuncy/sense_energy_prometheus_exporter:"$(VERSION)"
 
 release-dockerhub:
 	echo Building version $(VERSION) && \
 	docker login && \
 	docker buildx create --use && \
-	docker buildx build \
+	docker buildx build . \
 	  --push \
-	  --platform linux/amd64,linux/arm64 \
-	  --tag ejsuncy/sense_energy_prometheus_exporter:"$(VERSION)" \
-	  --tag ejsuncy/sense_energy_prometheus_exporter:latest .
+	  --platform linux/amd64,linux/arm64/v8 \
+	  --tag ejsuncy/sense_energy_prometheus_exporter:"$(VERSION)"
+
+release-ghcr:
+	echo Building version $(VERSION) && \
+	echo $GITHUB_CR_PAT| docker login ghcr.io -u ejsuncy --password-stdin && \
+	docker buildx create --use && \
+	docker buildx build . \
+	  --push \
+	  --platform linux/amd64,linux/arm64/v8 \
+	  --tag ghcr.io/ejsuncy/sense_energy_prometheus_exporter:"$(VERSION)"
 
 release-github:
 	export GITHUB_TOKEN="" && \
 	gh auth login && \
-	gh release create "v$(VERSION)" -F Changelog.md
+	gh release create --draft --generate-notes --title "Release v$(VERSION)" "v$(VERSION)"

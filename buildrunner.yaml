@@ -1,0 +1,12 @@
+steps:
+
+  bump-version:
+    run:
+      image: ghcr.io/ejsuncy/tool-build-bump2version:0.0.1
+      files:
+        ./: "/bump:rw"
+      cwd: /bump
+      cmds:
+        - bump2version ${BUMP_TYPE}
+      env:
+        BUMP_TYPE: {{ BUILDRUNNER_BUMP_TYPE }}

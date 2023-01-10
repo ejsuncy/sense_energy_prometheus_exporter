@@ -218,14 +218,7 @@ make venv
 source .venv/bin/activate
 ```
 
-After making changes, consider whether they need to be released in a new version. 
-For example, documentation changes usually don't need to have an incremented version.
-
-Code changes do need to be released in a new version. In this case, increment the version
-appropriately in [VERSION.txt](VERSION.txt) (use [Semantic Versioning](https://semver.org)).
-Next, add the new version to [Changelog.md](Changelog.md) and describe your changes there.
-
-Now commit your changes and create a PR to the `main` branch.
+Make and commit changes and create a PR to the `main` branch.
 
 Once the changes are approved and merged to `main`, the repository owner can 
 check out the latest code and [release the new version](#releaseandpublishing).
@@ -233,17 +226,23 @@ check out the latest code and [release the new version](#releaseandpublishing).
 ### Containerizing
 Clone this repository and containerize for your machine, tagging the image however you want:
 ```shell
-docker build -t ejsuncy/sense_energy_prometheus_exporter:latest .
+docker build -t ghcr.io/ejsuncy/sense_energy_prometheus_exporter:latest .
 ```
 
 Or build for other architectures (for example, if you're developing on an ARM mac but deploying to AMD linux kubernetes):
 ```shell
-docker buildx build -t ejsuncy/sense_energy_prometheus_exporter:latest --platform linux/amd64 .
+docker buildx build -t ghcr.io/ejsuncy/sense_energy_prometheus_exporter:latest --platform linux/amd64 .
 ```
 
 Build locally for multiple architectures:
 ```shell
 make build
+```
+
+### Versioning
+Bump the version of this with:
+```shell
+BUILDRUNNER_BUMP_TYPE=patch buildrunner -s bump-version
 ```
 
 ### <a name="releaseandpublishing"></a>Releasing & Publishing
@@ -252,13 +251,12 @@ Note: this will make a release for the current state of the default branch in or
 changes before making the release.
 
 Tag, build, and push the docker image for multiple architectures with version listed in 
-[VERSION.txt](VERSION.txt) to docker hub:
+[VERSION.txt](VERSION.txt) to GitHub Packages:
 ```shell
-make release-dockerhub
+make release-ghcr
 ```
 
-Make a github release with the release tag listed in [VERSION.txt](VERSION.txt)
-and release notes listed in [Changelog.md](Changelog.md):
+Make a github release with the release tag listed in [VERSION.txt](VERSION.txt):
 ```shell
 make release-github
 ```
