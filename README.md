@@ -2,6 +2,9 @@
 
 ---
 
+> **Note**
+> See the latest release to the right and select the corresponding branch or tag above for applicable README instructions
+
 This is a prometheus exporter for the [Sense](https://sense.com) energy monitor products.
 
 # Is this the right tool for me?
