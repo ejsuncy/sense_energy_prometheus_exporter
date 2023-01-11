@@ -25,7 +25,7 @@ release-dockerhub:
 
 release-ghcr:
 	echo Building version $(VERSION) && \
-	echo $GITHUB_CR_PAT| docker login ghcr.io -u ejsuncy --password-stdin && \
+	echo "${GITHUB_CR_PAT}" | docker login ghcr.io -u ejsuncy --password-stdin && \
 	docker buildx create --use && \
 	docker buildx build . \
 	  --push \
