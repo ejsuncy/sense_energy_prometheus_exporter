@@ -1,9 +1,7 @@
-# Sense Energy Prometheus Exporter
-
----
-
 > **Note**
 > See the latest release to the right and select the corresponding branch or tag above for applicable README instructions
+
+# Sense Energy Prometheus Exporter
 
 This is a prometheus exporter for the [Sense](https://sense.com) energy monitor products.
 
