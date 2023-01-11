@@ -47,7 +47,7 @@ The image can be found on
 
 ## Usage
 ```shell
-docker pull ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.2.0a
+docker pull ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.2.0
 ```
 
 ### Running locally
@@ -69,7 +69,7 @@ docker run --rm \
 -it --network bridge \
 -p"9993:9993" \
 --mount type=bind,source="$(pwd)"/volumes,target=/etc/sense_energy_prometheus_exporter \
-ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.2.0a
+ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.2.0
 ```
 
 Then visit in your browser:
@@ -142,7 +142,7 @@ spec:
         app: prometheus-exporters-sense
     spec:
       containers:
-      - image: ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.2.0a
+      - image: ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.2.0
         name: sense
         resources:
           limits:
@@ -240,7 +240,7 @@ make build
 ### Making a minor version release
 1. Bump the new minor version of this container
     ```shell
-    BUILDRUNNER_BUMP_TYPE=patch buildrunner -s bump-version
+    BUILDRUNNER_BUMP_TYPE=alpha buildrunner -s bump-version
     ```
 2. Commit, open a PR, and merge changes to `main`
 3. Make the release on GitHub with the new minor version tag
