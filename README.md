@@ -47,7 +47,7 @@ The image can be found on
 
 ## Usage
 ```shell
-docker pull ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.1.4
+docker pull ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.2.0a
 ```
 
 ### Running locally
@@ -69,7 +69,7 @@ docker run --rm \
 -it --network bridge \
 -p"9993:9993" \
 --mount type=bind,source="$(pwd)"/volumes,target=/etc/sense_energy_prometheus_exporter \
-ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.1.4
+ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.2.0a
 ```
 
 Then visit in your browser:
@@ -142,7 +142,7 @@ spec:
         app: prometheus-exporters-sense
     spec:
       containers:
-      - image: ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.1.4
+      - image: ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.2.0a
         name: sense
         resources:
           limits:
@@ -261,12 +261,12 @@ make build
 
 ### Making a patch version release
 1. Start with the version branch to be patched (ie `0.0.x`)
-2. Run a `patch` and `snap` version bump
+2. Run a `patch` and `alpha` version bump
     ```shell
     BUILDRUNNER_BUMP_TYPE=patch buildrunner -s bump-version
     ```
     ```shell
-    BUILDRUNNER_BUMP_TYPE=snap buildrunner -s bump-version
+    BUILDRUNNER_BUMP_TYPE=alpha buildrunner -s bump-version
     ```
 3. Make a patch branch
     ```shell
