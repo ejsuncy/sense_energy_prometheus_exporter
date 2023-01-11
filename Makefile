@@ -11,7 +11,6 @@ build:
 	echo Building version $(VERSION) && \
 	docker buildx create --use && \
 	docker buildx build . \
-	  --platform linux/amd64,linux/arm64/v8 \
 	  --tag ghcr.io/ejsuncy/sense_energy_prometheus_exporter:"$(VERSION)"
 
 release-dockerhub:
