@@ -1,11 +1,19 @@
-FROM python:3.8
-WORKDIR /usr/src/app
-COPY requirements.txt ./
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
-COPY sense_energy_prometheus_exporter /tmp/exporter
-COPY VERSION.txt /tmp/exporter/
-RUN pip install --no-cache-dir /tmp/exporter
-COPY ./main.py ./
+FROM python:3.8 as build
 
-ENTRYPOINT ["python", "./main.py"]
+WORKDIR /sense
+
+COPY ./main.py ./requirements.txt ./
+COPY sense_energy_prometheus_exporter ./sense/exporter
+COPY VERSION.txt ./sense/exporter/
+
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt && \ 
+    pip install --no-cache-dir ./sense/exporter
+
+FROM gcr.io/distroless/python3
+
+ENV PYTHONPATH /sense_exporter
+COPY --from=build /usr/local/lib/python3.8/site-packages / 
+COPY --from=build /sense/main.py /
+
+ENTRYPOINT ["python", "main.py"]
