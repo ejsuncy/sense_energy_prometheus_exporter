@@ -1,11 +1,11 @@
-VERSION=`cat VERSION.txt`
+VERSION=`cat VERSION.txt | tr -d '\n'`
+CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD | tr -d '\n'`
 
 venv:
 	python3 -m venv .venv && \
 	source .venv/bin/activate && \
 	pip install --upgrade pip build setuptools wheel && \
 	pip install -r requirements.txt
-
 
 build:
 	echo Building version $(VERSION) && \
@@ -33,6 +33,7 @@ release-ghcr:
 	  --tag ghcr.io/ejsuncy/sense_energy_prometheus_exporter:"$(VERSION)"
 
 release-github:
-	export GITHUB_TOKEN="" && \
-	gh auth login && \
-	gh release create --draft --generate-notes --title "Release v$(VERSION)" "v$(VERSION)"
+	gh release create --draft --generate-notes --target main --title "Release v$(VERSION)" "v$(VERSION)"
+
+release-patch-github:
+	echo gh release create --draft --generate-notes --target $(CURRENT_BRANCH) --title "Patch v$(VERSION)" "v$(VERSION)"

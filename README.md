@@ -43,15 +43,11 @@ See [the sample metrics](data/metrics.txt) for a list of metrics you can query i
 Internally it uses the [Sense Energy Monitor API Interface](https://github.com/scottbonline/sense) client.
 
 The image can be found on
-[Dockerhub](https://hub.docker.com/repository/docker/ejsuncy/sense_energy_prometheus_exporter). 
-
-
-Builds are currently manual with each new version since Docker automated builds don't currently support
-building for arm64.
+[GitHub Packages](https://github.com/ejsuncy/sense_energy_prometheus_exporter/pkgs/container/sense_energy_prometheus_exporter). 
 
 ## Usage
 ```shell
-docker pull ejsuncy/sense_energy_prometheus_exporter:latest
+docker pull ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.1.4
 ```
 
 ### Running locally
@@ -73,7 +69,7 @@ docker run --rm \
 -it --network bridge \
 -p"9993:9993" \
 --mount type=bind,source="$(pwd)"/volumes,target=/etc/sense_energy_prometheus_exporter \
-ejsuncy/sense_energy_prometheus_exporter:latest
+ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.1.4
 ```
 
 Then visit in your browser:
@@ -146,7 +142,7 @@ spec:
         app: prometheus-exporters-sense
     spec:
       containers:
-      - image: ejsuncy/sense_energy_prometheus_exporter:latest
+      - image: ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.1.4
         name: sense
         resources:
           limits:
@@ -221,17 +217,17 @@ source .venv/bin/activate
 Make and commit changes and create a PR to the `main` branch.
 
 Once the changes are approved and merged to `main`, the repository owner can 
-check out the latest code and [release the new version](#releaseandpublishing).
+check out the latest code and [release the new version](#releases).
 
 ### Containerizing
 Clone this repository and containerize for your machine, tagging the image however you want:
 ```shell
-docker build -t ghcr.io/ejsuncy/sense_energy_prometheus_exporter:latest .
+docker build -t ghcr.io/ejsuncy/sense_energy_prometheus_exporter:local .
 ```
 
 Or build for other architectures (for example, if you're developing on an ARM mac but deploying to AMD linux kubernetes):
 ```shell
-docker buildx build -t ghcr.io/ejsuncy/sense_energy_prometheus_exporter:latest --platform linux/amd64 .
+docker buildx build -t ghcr.io/ejsuncy/sense_energy_prometheus_exporter:local --platform linux/amd64 .
 ```
 
 Build locally for multiple architectures:
@@ -239,24 +235,49 @@ Build locally for multiple architectures:
 make build
 ```
 
-### Versioning
-Bump the version of this with:
-```shell
-BUILDRUNNER_BUMP_TYPE=patch buildrunner -s bump-version
-```
+## Releases
 
-### <a name="releaseandpublishing"></a>Releasing & Publishing
-The [github cli](https://github.com/cli/cli) is required for making releases.
-Note: this will make a release for the current state of the default branch in origin, so commit and push
-changes before making the release.
+### Making a minor version release
+1. Bump the new minor version of this container
+    ```shell
+    BUILDRUNNER_BUMP_TYPE=patch buildrunner -s bump-version
+    ```
+2. Commit, open a PR, and merge changes to `main`
+3. Make the release on GitHub with the new minor version tag
+    ```shell
+    git checkout main && \
+    git pull && \
+    make release-github
+    ```
+4. Build and Publish the image
+    ```shell
+    make release-ghcr
+    ```
+5. Make a new branch from `main` with the new version name (ie `0.0.x`)
+6. Move `main` to the next `alpha` version to capture future development
+    ```shell
+    BUILDRUNNER_BUMP_TYPE=minor buildrunner -s bump-version
+    ```
 
-Tag, build, and push the docker image for multiple architectures with version listed in 
-[VERSION.txt](VERSION.txt) to GitHub Packages:
-```shell
-make release-ghcr
-```
-
-Make a github release with the release tag listed in [VERSION.txt](VERSION.txt):
-```shell
-make release-github
-```
+### Making a patch version release
+1. Start with the version branch to be patched (ie `0.0.x`)
+2. Run a `patch` and `snap` version bump
+    ```shell
+    BUILDRUNNER_BUMP_TYPE=patch buildrunner -s bump-version
+    ```
+    ```shell
+    BUILDRUNNER_BUMP_TYPE=snap buildrunner -s bump-version
+    ```
+3. Make a patch branch
+    ```shell
+    git checkout -b "patch-$(cat VERSION.txt | tr -d '\n')"
+    ```
+4. Commit, open a PR, and merge changes to the version branch
+5. Make the patch release on GitHub targeting the minor version branch with the new patch version tag
+    ```shell
+    make release-patch-github
+    ```
+6. Build and publish the patch image
+    ```shell
+    make release-ghcr
+    ```
