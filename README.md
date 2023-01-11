@@ -261,12 +261,12 @@ make build
 
 ### Making a patch version release
 1. Start with the version branch to be patched (ie `0.0.x`)
-2. Run a `patch` and `snap` version bump
+2. Run a `patch` and `alpha` version bump
     ```shell
     BUILDRUNNER_BUMP_TYPE=patch buildrunner -s bump-version
     ```
     ```shell
-    BUILDRUNNER_BUMP_TYPE=snap buildrunner -s bump-version
+    BUILDRUNNER_BUMP_TYPE=alpha buildrunner -s bump-version
     ```
 3. Make a patch branch
     ```shell
