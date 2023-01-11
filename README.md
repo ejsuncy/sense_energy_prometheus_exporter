@@ -48,7 +48,7 @@ The image can be found on
 
 ## Usage
 ```shell
-docker pull ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.3.0a
+docker pull ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.3.0
 ```
 
 ### Running locally
@@ -70,7 +70,7 @@ docker run --rm \
 -it --network bridge \
 -p"9993:9993" \
 --mount type=bind,source="$(pwd)"/volumes,target=/etc/sense_energy_prometheus_exporter \
-ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.3.0a
+ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.3.0
 ```
 
 Then visit in your browser:
@@ -143,7 +143,7 @@ spec:
         app: prometheus-exporters-sense
     spec:
       containers:
-      - image: ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.3.0a
+      - image: ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.3.0
         name: sense
         resources:
           limits:
