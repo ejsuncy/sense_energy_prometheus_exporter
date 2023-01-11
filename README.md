@@ -47,7 +47,7 @@ The image can be found on
 
 ## Usage
 ```shell
-docker pull ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.2.0
+docker pull ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.3.0a
 ```
 
 ### Running locally
@@ -69,7 +69,7 @@ docker run --rm \
 -it --network bridge \
 -p"9993:9993" \
 --mount type=bind,source="$(pwd)"/volumes,target=/etc/sense_energy_prometheus_exporter \
-ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.2.0
+ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.3.0a
 ```
 
 Then visit in your browser:
@@ -142,7 +142,7 @@ spec:
         app: prometheus-exporters-sense
     spec:
       containers:
-      - image: ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.2.0
+      - image: ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.3.0a
         name: sense
         resources:
           limits:
@@ -256,7 +256,11 @@ make build
 5. Make a new branch from `main` with the new version name (ie `0.0.x`)
 6. Move `main` to the next `alpha` version to capture future development
     ```shell
-    BUILDRUNNER_BUMP_TYPE=minor buildrunner -s bump-version
+    BUILDRUNNER_BUMP_TYPE=minor buildrunner -s bump-version && \
+    git add . && \
+    git checkout -b "make-$(cat VERSION.txt | tr -d '\n')" && \
+    git cm "Move main to v$(cat VERSION.txt | tr -d '\n')" && \
+    hub pull-request -focp -bmain
     ```
 
 ### Making a patch version release
