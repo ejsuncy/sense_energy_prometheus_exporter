@@ -256,20 +256,14 @@ make build
 5. Make a new branch from `main` with the new version name (ie `0.0.x`)
 6. Move `main` to the next `alpha` version to capture future development
     ```shell
-    BUILDRUNNER_BUMP_TYPE=minor buildrunner -s bump-version && \
-    git add . && \
-    git checkout -b "make-$(cat VERSION.txt | tr -d '\n')" && \
-    git cm "Move main to v$(cat VERSION.txt | tr -d '\n')" && \
-    hub pull-request -focp -bmain
+    make alpha
     ```
 
 ### Making a patch version release
 1. Start with the version branch to be patched (ie `0.0.x`)
 2. Run a `patch` and `alpha` version bump
     ```shell
-    BUILDRUNNER_BUMP_TYPE=patch buildrunner -s bump-version
-    ```
-    ```shell
+    BUILDRUNNER_BUMP_TYPE=patch buildrunner -s bump-version && \
     BUILDRUNNER_BUMP_TYPE=alpha buildrunner -s bump-version
     ```
 3. Make a patch branch

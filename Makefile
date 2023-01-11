@@ -37,3 +37,10 @@ release-github:
 
 release-patch-github:
 	gh release create --draft --generate-notes --target $(CURRENT_BRANCH) --title "Patch v$(VERSION)" "v$(VERSION)"
+
+alpha:
+	BUILDRUNNER_BUMP_TYPE=minor buildrunner -s bump-version && \
+	git add . && \
+	git checkout -b "make-$(VERSION)" && \
+	git cm "Move main to v$(VERSION)" && \
+	hub pull-request -focp -bmain
