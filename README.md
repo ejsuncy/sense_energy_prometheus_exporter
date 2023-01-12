@@ -3,6 +3,9 @@
 
 # Sense Energy Prometheus Exporter
 
+![Current Version](https://img.shields.io/badge/Version-0.3.0-brightgreen)
+![GitHub commits difference between two branches/tags/commits](https://img.shields.io/github/commits-difference/ejsuncy/sense_energy_prometheus_exporter?base=0.3.x&head=main&label=commits%20difference%20from%20main)
+
 This is a prometheus exporter for the [Sense](https://sense.com) energy monitor products.
 
 # Is this the right tool for me?
