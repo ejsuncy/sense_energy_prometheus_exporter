@@ -1,4 +1,4 @@
-FROM python:3.8 as build
+FROM python:3.11 as build
 
 WORKDIR /sense
 
