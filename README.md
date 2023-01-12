@@ -2,6 +2,8 @@
 > See the latest release to the right and select the corresponding branch or tag above for applicable README instructions
 
 # Sense Energy Prometheus Exporter
+![Current Version](https://img.shields.io/badge/Version-0.4.0a-brightgreen)
+![GitHub commits since latest release (by SemVer)](https://img.shields.io/github/commits-since/ejsuncy/sense_energy_prometheus_exporter/latest?sort=semver)
 
 This is a prometheus exporter for the [Sense](https://sense.com) energy monitor products.
 
