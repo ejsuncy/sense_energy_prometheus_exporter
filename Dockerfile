@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 FROM gcr.io/distroless/python3-debian11
 
 ENV PYTHONPATH /sense_exporter
-COPY --from=build /usr/local/lib/python3.8/site-packages / 
+COPY --from=build /usr/local/lib/python3.11/site-packages /
 COPY --from=build /sense/main.py /
 
 ENTRYPOINT ["python", "main.py"]
