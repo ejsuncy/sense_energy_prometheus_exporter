@@ -1,0 +1,3 @@
+[submodule "git-submod-lib"]
+	path = git-submod-lib
+	url = git@github.com:ejsuncy/git-submod-lib.git

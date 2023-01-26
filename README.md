@@ -209,76 +209,69 @@ metadata:
 **Again, be careful of the scrape interval.** The internal client does some self-throttling but make sure you don't
 swamp the sense servers.
 
-## Development
-### Building
-Assume all development starts with this virtual environment:
+## Contributing and Development
+
+### Update git-submod-lib submodule for current Makefile Targets
 ```shell
-make venv
-source .venv/bin/activate
+git submodule update --remote
 ```
 
-Make and commit changes and create a PR to the `main` branch.
-
-Once the changes are approved and merged to `main`, the repository owner can 
-check out the latest code and [release the new version](#releases).
-
-### Containerizing
-Clone this repository and containerize for your machine, tagging the image however you want:
+### Make Python venv and install requirements
 ```shell
-docker build -t ghcr.io/ejsuncy/sense_energy_prometheus_exporter:local .
+make -f git-submod-lib/makefile/Makefile venv
 ```
 
-Or build for other architectures (for example, if you're developing on an ARM mac but deploying to AMD linux kubernetes):
+Make and commit changes, and then build and test the image locally as follows.
+
+### Build Image Locally
 ```shell
-docker buildx build -t ghcr.io/ejsuncy/sense_energy_prometheus_exporter:local --platform linux/amd64 .
+make -f git-submod-lib/makefile/Makefile build-image
 ```
 
-Build locally for multiple architectures:
+### Make a pull request to `main` with your changes
 ```shell
-make build
+make -f git-submod-lib/makefile/Makefile pull-request-main
 ```
 
-## Releases
+## Releasing
 
-### Making a minor version release
-1. Bump the new minor version of this container
-    ```shell
-    BUILDRUNNER_BUMP_TYPE=alpha buildrunner -s bump-version
-    ```
-2. Commit, open a PR, and merge changes to `main`
-3. Make the release on GitHub with the new minor version tag
-    ```shell
-    git checkout main && \
-    git pull && \
-    make release-github
-    ```
-4. Build and Publish the image
-    ```shell
-    make release-ghcr
-    ```
-5. Make a new branch from `main` with the new version name (ie `0.0.x`)
-6. Move `main` to the next `alpha` version to capture future development
-    ```shell
-    make alpha
-    ```
+### Minor releases
+```shell
+make -f git-submod-lib/makefile/Makefile promotion-alpha
+```
 
-### Making a patch version release
-1. Start with the version branch to be patched (ie `0.0.x`)
-2. Run a `patch` and `alpha` version bump
-    ```shell
-    BUILDRUNNER_BUMP_TYPE=patch buildrunner -s bump-version && \
-    BUILDRUNNER_BUMP_TYPE=alpha buildrunner -s bump-version
-    ```
-3. Make a patch branch
-    ```shell
-    git checkout -b "patch-$(cat VERSION.txt | tr -d '\n')"
-    ```
-4. Commit, open a PR, and merge changes to the version branch
-5. Make the patch release on GitHub targeting the minor version branch with the new patch version tag
-    ```shell
-    make release-patch-github
-    ```
-6. Build and publish the patch image
-    ```shell
-    make release-ghcr
-    ```
+Once the PR is approved and merged:
+```shell
+make -f git-submod-lib/makefile/Makefile github-release
+```
+
+Once the Release is published:
+```shell
+make -f git-submod-lib/makefile/Makefile github-image
+```
+
+Now cut a version release branch:
+```shell
+make -f git-submod-lib/makefile/Makefile github-branch
+```
+
+Now move `main` to the next `alpha` version to capture future development
+```shell
+make -f git-submod-lib/makefile/Makefile version-alpha
+```
+
+### Patch releases
+Start with the version branch to be patched (ie `0.0.x`)
+```shell
+make -f git-submod-lib/makefile/Makefile promotion-patch
+```
+
+Once the PR is approved and merged:
+```shell
+make -f git-submod-lib/makefile/Makefile github-release-patch
+```
+
+Once the Patch Release is published:
+```shell
+make -f git-submod-lib/makefile/Makefile github-image
+```
