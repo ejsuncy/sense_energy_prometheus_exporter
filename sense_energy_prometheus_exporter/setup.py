@@ -23,5 +23,5 @@ setuptools.setup(
         'prometheus_client',
         'sense_energy',
         'pyyaml'
-    ],
+    ]
 )
