@@ -18,10 +18,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     packages=setuptools.find_packages(),
-    python_requires='>=3.6',
-    install_requires=[
-        'prometheus_client == 0.9.0',
-        'pyyaml==5.4.1',
-        'sense_energy == 0.9.0'
-    ]
+    python_requires='>=3.6'
 )
