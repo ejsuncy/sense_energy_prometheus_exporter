@@ -1,3 +1,4 @@
 [submodule "git-submod-lib"]
 	path = git-submod-lib
 	url = git@github.com:ejsuncy/git-submod-lib.git
+	branch = 0.2.x
