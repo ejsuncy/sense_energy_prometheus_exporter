@@ -1,0 +1,13 @@
+services:
+  exporter:
+    # reference the image tag you want to use
+    # image: "ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.7.0a"
+    # or build from the Dockerfile
+    build: .
+    ports:
+      - "9993:9993"
+    environment:
+      SENSE_ACCOUNT_NAME_0: "home"
+      SENSE_ACCOUNT_USERNAME_0: "${SENSE_ACCOUNT_USERNAME_0}"
+      SENSE_ACCOUNT_PASSWORD_0: "${SENSE_ACCOUNT_PASSWORD_0}"
+      TZ: "America/Denver"

@@ -209,6 +209,13 @@ metadata:
 **Again, be careful of the scrape interval.** The internal client does some self-throttling but make sure you don't
 swamp the sense servers.
 
+### Running via docker-compose
+You can run this image via docker-compose by setting the appropriate environment variables and running the command:
+
+```shell
+docker-compose up
+```
+
 ## Contributing and Development
 
 ### Update git-submod-lib submodule for current Makefile Targets

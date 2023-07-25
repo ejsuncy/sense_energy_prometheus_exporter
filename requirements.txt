@@ -1,3 +1,4 @@
 prometheus_client==0.17.1
 pyyaml==6.0.1
 sense_energy==0.12.0
+orjson==3.9.2
