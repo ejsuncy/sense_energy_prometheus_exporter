@@ -213,6 +213,7 @@ swamp the sense servers.
 You can run this image via docker-compose by setting the appropriate environment variables and running the command:
 
 ```shell
+docker-compose build && \
 docker-compose up
 ```
 
