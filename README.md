@@ -221,7 +221,7 @@ docker-compose up
 
 ### Update git-submod-lib submodule for current Makefile Targets
 ```shell
-git submodule update --remote
+git submodule update --init --remote
 ```
 
 ### Make Python venv and install requirements
