@@ -26,7 +26,7 @@ class FileParser():
                     app_configs = yaml.load(config_file, Loader=yaml.FullLoader)
                     app.app_configs = app_configs
                 except Exception as e:
-                    logging.error("Unable to parse app config file %s: %s", app.app_config_file, e)
+                    logging.warning("Unable to parse app config file %s: %s.", app.app_config_file, e)
                     raise e
         except Exception as e:
-            logging.warning("Unable to open app config file %s: %s", app.app_config_file, e)
+            logging.warning("Unable to process app config file %s: %s. Skipping.", app.app_config_file, e)
