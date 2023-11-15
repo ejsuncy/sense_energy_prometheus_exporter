@@ -2,7 +2,7 @@
 > See the latest release to the right and select the corresponding branch or tag above for applicable README instructions
 
 # Sense Energy Prometheus Exporter
-![Current Version](https://img.shields.io/badge/Version-0.7.0-brightgreen)
+![Current Version](https://img.shields.io/badge/Version-0.8.0a-brightgreen)
 ![GitHub commits difference between two branches/tags/commits](https://img.shields.io/github/commits-difference/ejsuncy/sense_energy_prometheus_exporter?base=main&head=main&label=commits%20difference%20from%20main)
 
 This is a prometheus exporter for the [Sense](https://sense.com) energy monitor products.
@@ -50,7 +50,7 @@ The image can be found on
 
 ## Usage
 ```shell
-docker pull ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.7.0
+docker pull ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.8.0a
 ```
 
 ### Running locally
@@ -72,7 +72,7 @@ docker run --rm \
 -it --network bridge \
 -p"9993:9993" \
 --mount type=bind,source="$(pwd)"/volumes,target=/etc/sense_energy_prometheus_exporter \
-ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.7.0
+ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.8.0a
 ```
 
 Then visit in your browser:
@@ -145,7 +145,7 @@ spec:
         app: prometheus-exporters-sense
     spec:
       containers:
-      - image: ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.7.0
+      - image: ghcr.io/ejsuncy/sense_energy_prometheus_exporter:0.8.0a
         name: sense
         resources:
           limits:
