@@ -19,9 +19,5 @@ setuptools.setup(
     ],
     packages=setuptools.find_packages(),
     python_requires='>=3.6',
-    install_requires=[
-        'prometheus_client',
-        'sense_energy',
-        'pyyaml'
-    ]
+    install_requires=[]
 )
