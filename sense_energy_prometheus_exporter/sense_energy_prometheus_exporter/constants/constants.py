@@ -14,6 +14,9 @@ class EnvironmentVariableKeys():
     SENSE_ACCOUNT_PASSWORD_KEY = "SENSE_ACCOUNT_PASSWORD_"
     SENSE_ACCOUNT_NAME = "SENSE_ACCOUNT_NAME_"
 
+    # Collector config values.
+    TIMELINE_NUM_ITEMS = "TIMELINE_NUM_ITEMS"
+
 
 class LogLevelOptions():
     # Logging Options

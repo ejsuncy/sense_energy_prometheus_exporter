@@ -77,7 +77,7 @@ class SenseDevice(object):
         return self._account
 
     @classmethod
-    def from_api(cls, account, account_devices: [object]):
+    def from_api(cls, account, account_devices: list[dict]):
         logging.debug("Converting sense api devices: %s", pprint.pformat(account_devices))
         devices: [SenseDevice] = []
 
@@ -85,6 +85,57 @@ class SenseDevice(object):
             devices.append(SenseDevice(account, account_device['name'], account_device['w']))
 
         return devices
+
+
+class SenseEvent(object):
+    def __init__(self, account, name, type: str, timestamp: datetime):
+        self._account = account
+        self._name = name
+        self._type = type
+        self._timestamp = timestamp
+
+    def __getitem__(self, item):
+        return getattr(self, item)
+
+    @property
+    def type(self):
+        return self._type
+
+    @property
+    def timestamp(self):
+        return self._timestamp
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def account(self):
+        return self._account
+
+    @classmethod
+    def from_api(
+        cls, account, account_device_data: list[dict], account_events: list[dict]
+    ):
+        logging.debug("Converting sense api events: %s", pprint.pformat(account_events))
+        events: [SenseEvent] = []
+
+        device_id_names = {d["id"]: d["name"] for d in account_device_data}
+        for event in account_events:
+            device_id = event.get("device_id")
+            if not device_id:
+                continue
+            event_time = datetime.fromisoformat(event["time"])
+            events.append(
+                SenseEvent(
+                    account,
+                    device_id_names[device_id],
+                    event["type"],
+                    event_time,
+                )
+            )
+
+        return events
 
 
 class SenseCurrent(object):
@@ -239,8 +290,9 @@ class SenseTrend(object):
 
 
 class SenseClient(object):
-    def __init__(self, accounts: [SenseAccount]):
+    def __init__(self, accounts: list[SenseAccount], timeline_num_items: int):
         self._accounts: [SenseAccount] = accounts
+        self._timeline_num_items = timeline_num_items
 
     def add_accounts(self, accounts: [SenseAccount]) -> None:
         self._accounts.extend(accounts)
@@ -267,6 +319,32 @@ class SenseClient(object):
             devices.extend(SenseDevice.from_api(account.name, account_devices))
 
         return devices
+
+    @property
+    def timeline(self):
+        events = []
+
+        account: SenseAccount
+        for account in self.accounts:
+            if account.should_authenticate():
+                account.authenticate()
+            try:
+                all_devices = account.senseable.get_discovered_device_data()
+                account_events = account.senseable.get_all_usage_data(
+                    payload={"n_items": self._timeline_num_items, "rollup": False}
+                ).get("items", [])
+            except Exception as e:
+                logging.error(
+                    "Unable to retrieve device data from Sense account name %s: %s",
+                    account.name,
+                    e,
+                )
+                continue
+
+            events.extend(
+                SenseEvent.from_api(account.name, all_devices, account_events)
+            )
+        return events
 
     @property
     def currents(self) -> [SenseCurrent]:
