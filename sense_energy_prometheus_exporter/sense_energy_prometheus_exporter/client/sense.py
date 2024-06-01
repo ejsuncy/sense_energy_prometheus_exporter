@@ -169,13 +169,18 @@ class SensePower(object):
 
 
 class SenseVoltage(object):
-    def __init__(self, account=None, name=None, volts=0.0):
+    def __init__(self, account=None, name=None, phase=0, volts=0.0):
         self._account = account
         self._name = name
+        self._phase = str(phase)
         self._volts = volts
 
     def __getitem__(self, item):
         return getattr(self, item)
+
+    @property
+    def phase(self):
+        return self._phase
 
     @property
     def volts(self):
@@ -193,9 +198,10 @@ class SenseVoltage(object):
     def from_api(cls, account, name, account_voltage: [float]):
         logging.debug("Converting sense api voltage: %s", pprint.pformat(account_voltage))
 
-        voltage_total = sum(account_voltage)
-
-        return SenseVoltage(account, name, voltage_total)
+        return [
+            SenseVoltage(account, name, phase_index, phase_voltage)
+            for phase_index, phase_voltage in enumerate(account_voltage, 1)
+        ]
 
 
 class SenseTrendPeriod:
@@ -364,10 +370,10 @@ class SenseClient(object):
                 logging.error("Unable to retrieve voltage info from Sense account name %s: %s", account.name, e)
                 continue
 
-            voltages.append(SenseVoltage.from_api(account.name, "main", voltage))
+            voltages.extend(SenseVoltage.from_api(account.name, "main", voltage))
 
             if voltage_solar:
-                voltages.append(SenseVoltage.from_api(account.name, "solar", voltage_solar))
+                voltages.extend(SenseVoltage.from_api(account.name, "solar", voltage_solar))
 
         return voltages
 
