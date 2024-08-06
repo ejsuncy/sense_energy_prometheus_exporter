@@ -17,7 +17,7 @@ class VoltageCollector(CustomCollector):
     subsystemPrefix: str = "voltage"
 
     # the set of labels that describe each of your items that you are scraping
-    voltageLabels: [str] = ["account", "name"]
+    voltageLabels: [str] = ["account", "name", "phase"]
 
     # This is the client that calls external apis for the items you want to scrape
     sense_client: SenseClient
