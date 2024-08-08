@@ -1,7 +1,7 @@
 services:
   exporter:
     # reference the image tag you want to use
-#    image: "ghcr.io/ejsuncy/sense_energy_prometheus_exporter:1.0.0"
+#    image: "ghcr.io/ejsuncy/sense_energy_prometheus_exporter:1.1.0a"
     # or build from the Dockerfile
     build: .
     ports:
