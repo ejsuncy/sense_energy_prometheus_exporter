@@ -84,17 +84,18 @@ You can find sample metric output in [data/metrics.txt](data/metrics.txt).
 
 #### Environment Variables
 
-| Variable | Description | Options | Default |
-|---|---|---|---|
-| `EXPORTER_LOG_LEVEL` | Controls verbosity of logs | `DEBUG`, `INFO`, `WARNING`, `ERROR` | `INFO` |
-| `SENSE_ACCOUNT_NAME_<n>` | The name to identify the account by. `<n>` is an integer that links the other env vars containing `<n>`. | | |
-| `SENSE_ACCOUNT_USERNAME_<n>` | The username (email address) used to login to the account. `<n>` is an integer that links the other env vars containing `<n>`. | | |
-| `SENSE_ACCOUNT_PASSWORD_<n>` | The password used to login to the account. `<n>` is an integer that links the other env vars containing `<n>`. | | |
-| `TZ` | The timezone to use for the container. Use the string in `TZ database name` column of the [List of TZ Database Time Zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). | | None (container defaults to UTC time)|
-| `EXPORTER_PORT` | The port to listen on | | `9993` |
-| `EXPORTER_BIND_HOST` | The address to listen on | | `0.0.0.0` |
-| `EXPORTER_NAMESPACE` | The prefix to use for prometheus metrics | | `sense_energy` |
-| `CONFIG_FILE` | The container filepath to the config file | | `/etc/sense_energy_prometheus_exporter/config.yaml` |
+| Variable                     | Description                                                                                                                                                                               | Options                             | Default                                             |
+|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|-----------------------------------------------------|
+| `EXPORTER_LOG_LEVEL`         | Controls verbosity of logs                                                                                                                                                                | `DEBUG`, `INFO`, `WARNING`, `ERROR` | `INFO`                                              |
+| `SENSE_ACCOUNT_NAME_<n>`     | The name to identify the account by. `<n>` is an integer that links the other env vars containing `<n>`.                                                                                  |                                     |                                                     |
+| `SENSE_ACCOUNT_USERNAME_<n>` | The username (email address) used to login to the account. `<n>` is an integer that links the other env vars containing `<n>`.                                                            |                                     |                                                     |
+| `SENSE_ACCOUNT_PASSWORD_<n>` | The password used to login to the account. `<n>` is an integer that links the other env vars containing `<n>`.                                                                            |                                     |                                                     |
+| `TZ`                         | The timezone to use for the container. Use the string in `TZ database name` column of the [List of TZ Database Time Zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). |                                     | None (container defaults to UTC time)               |
+| `EXPORTER_PORT`              | The port to listen on                                                                                                                                                                     |                                     | `9993`                                              |
+| `EXPORTER_BIND_HOST`         | The address to listen on                                                                                                                                                                  |                                     | `0.0.0.0`                                           |
+| `EXPORTER_NAMESPACE`         | The prefix to use for prometheus metrics                                                                                                                                                  |                                     | `sense_energy`                                      |
+| `CONFIG_FILE`                | The container filepath to the config file                                                                                                                                                 |                                     | `/etc/sense_energy_prometheus_exporter/config.yaml` |
+| `TIMELINE_NUM_ITEMS`         | The number of device timeline events to look up each polling request, such as device on/off events                                                                                        |                                     | "30"                                                |
 
 ### Running on kubernetes
 A sample manifest:
