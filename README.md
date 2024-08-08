@@ -284,3 +284,29 @@ Once the Patch Release is published:
 ```shell
 make -f git-submod-lib/makefile/Makefile github-image
 ```
+
+### Major releases
+```shell
+make -f git-submod-lib/makefile/Makefile promotion-major
+```
+
+Once the PR is approved and merged:
+```shell
+make -f git-submod-lib/makefile/Makefile github-release
+```
+
+Once the Release is published:
+```shell
+make -f git-submod-lib/makefile/Makefile github-image
+```
+
+Now cut a version release branch:
+```shell
+make -f git-submod-lib/makefile/Makefile github-branch
+```
+
+Now move `main` to the next `alpha` version to capture future development
+```shell
+make -f git-submod-lib/makefile/Makefile version-alpha
+```
+
