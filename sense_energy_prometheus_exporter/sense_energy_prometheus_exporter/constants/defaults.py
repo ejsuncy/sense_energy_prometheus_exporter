@@ -5,3 +5,5 @@ exporter_log_level = "INFO"
 exporter_namespace = "sense_energy"
 
 app_config_file = "/etc/sense_energy_prometheus_exporter/config.yaml"
+
+timeline_num_items = 30

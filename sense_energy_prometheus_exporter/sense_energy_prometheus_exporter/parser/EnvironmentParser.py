@@ -80,3 +80,12 @@ class EnvironmentParser():
             accounts.append(account)
 
         app.sense_accounts = accounts
+
+    @classmethod
+    def parse_collector_configs(cls, app):
+        timeline_num_items = os.getenv(envkey.TIMELINE_NUM_ITEMS)
+        if timeline_num_items:
+            logging.debug("Env var %s was set to %s", envkey.TIMELINE_NUM_ITEMS, timeline_num_items)
+            app.timeline_num_items = int(timeline_num_items)
+        else:
+            app.timeline_num_items = appDefaults.timeline_num_items

@@ -2,7 +2,7 @@ import time
 import logging
 from typing import Dict
 
-from sense_energy_prometheus_exporter import AccountCollector,DeviceCollector,CurrentCollector,FrequencyCollector,PowerCollector,VoltageCollector,TrendCollector
+from sense_energy_prometheus_exporter import AccountCollector,DeviceCollector,CurrentCollector,FrequencyCollector,PowerCollector,VoltageCollector,TrendCollector,TimelineCollector
 from sense_energy_prometheus_exporter import EnvironmentParser,FileParser
 from sense_energy_prometheus_exporter import SenseClient,SenseAccount
 
@@ -16,11 +16,12 @@ class ExporterApplication():
         self.exporter_port: str = None
         self.exporter_bind_host: str = None
         self.app_configs: Dict = None
+        self.timeline_num_items: int = 30
         self.sense_accounts: [SenseAccount] = []
 
     def register_collectors(self):
         logging.debug("Initializing Sense Client")
-        sense_client = SenseClient(self.sense_accounts)
+        sense_client = SenseClient(self.sense_accounts, self.timeline_num_items)
 
         logging.debug("Initializing AccountCollector")
         account_collector = AccountCollector(sense_client, self.exporter_namespace)
@@ -57,6 +58,11 @@ class ExporterApplication():
         logging.debug("Registering TrendCollector")
         REGISTRY.register(trend_collector)
 
+        logging.debug("Initializing TimelineCollector")
+        device_timeline_collector = TimelineCollector(sense_client, self.exporter_namespace)
+        logging.debug("Registering TimelineCollector")
+        REGISTRY.register(device_timeline_collector)
+
     def start_server(self):
         if app.app_configs:
             logging.info("App namespace from config file: %s", app.app_configs['namespace'])
@@ -73,6 +79,7 @@ if __name__ == '__main__':
     EnvironmentParser.parse_logging_config(app)
     EnvironmentParser.parse_server_config(app)
     EnvironmentParser.parse_sense_accounts(app)
+    EnvironmentParser.parse_collector_configs(app)
     FileParser.parse_app_configs(app)
     app.register_collectors()
     app.start_server()
